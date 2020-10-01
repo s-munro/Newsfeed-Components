@@ -97,7 +97,7 @@ const groupArticles = document.querySelector('.articles') //find something that 
 
 
 
-function articleMaker(title, date, firstParagraph, secondParagraph, thirdParagraph) {
+function articleMaker(objData) {
   // const groupArticles = document.querySelector('.articles') //find something that exists
 
 
@@ -134,11 +134,11 @@ function articleMaker(title, date, firstParagraph, secondParagraph, thirdParagra
     bigArticle.classList.toggle('article-close') // option to off
   })
 
-  newTitle.textContent = title
-  parDate.textContent = date
-  parOne.textContent = firstParagraph
-  parTwo.textContent = secondParagraph
-  parThree.textContent = thirdParagraph
+  newTitle.textContent = objData.title
+  parDate.textContent = objData.date
+  parOne.textContent = objData.firstParagraph
+  parTwo.textContent = objData.secondParagraph
+  parThree.textContent = objData.thirdParagraph
   newSpan.textContent = 'Click Me! +'
 
 
@@ -160,21 +160,13 @@ data.push({
 
 data.map((objData) => {
 
-  const createdArticle = articleMaker(objData.title, objData.date, objData.firstParagraph, objData.secondParagraph, objData.thirdParagraph); // Telling foreach to iterate and place each object into function
+  const createdArticle = articleMaker(objData); // Telling foreach to iterate and place each object into function
 
 
   groupArticles.appendChild(createdArticle); // Telling foreach to appendchild 
 
   console.log(createdArticle); // for my own reference
 })
-
-
-
-
-
-
-
-
 
 
 /*
@@ -198,4 +190,3 @@ data.map((objData) => {
   Step 5: Try adding new article object to the data array. Make sure it is in the same format as the others.
   Refresh the page to see the new article.
 */
-// console.log(articleMaker('title', 'date', 'par1', 'par2', 'par3'));
