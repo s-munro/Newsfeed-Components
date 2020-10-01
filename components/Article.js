@@ -1,8 +1,7 @@
 // This is the data we will be using to create our articles. Look at it, then proceed to line 93.
 // OPTIONAL: if you're feeling adventurous, try to make this data an export from a different module, and import it here.
 // You can read about ES6 modules here: https://exploringjs.com/es6/ch_modules.html#sec_basics-of-es6-modules
-const data = [
-  {
+const data = [{
     title: 'Lambda School Students: "We\'re the best!"',
     date: 'Nov 5th, 2018',
     firstParagraph: `Lucas ipsum dolor sit amet ben twi'lek padmé darth darth darth moff hutt organa twi'lek. Ben amidala secura skywalker lando
@@ -93,7 +92,84 @@ const data = [
   Step 1: Write a component called 'articleMaker' to create an article.
   Your component is a function that takes an article object as its only argument,
   and returns a DOM node looking like the one below:
+  */
+const groupArticles = document.querySelector('.articles') //find something that exists
 
+
+
+function articleMaker(objData) {
+  // const groupArticles = document.querySelector('.articles') //find something that exists
+
+
+  //Creating accordion
+
+  const bigArticle = document.createElement('div') // create all doc elements that asked for
+  const newTitle = document.createElement('h2')
+  const parDate = document.createElement('p')
+  const parOne = document.createElement('p')
+  const parTwo = document.createElement('p')
+  const parThree = document.createElement('p')
+  const newSpan = document.createElement('span')
+
+  //Class
+  bigArticle.classList.add('article')
+  newSpan.classList.add('expandButton')
+  parDate.classList.add('date')
+
+  //Appending elements
+  groupArticles.appendChild(bigArticle)
+  bigArticle.appendChild(newTitle) // h2
+  bigArticle.appendChild(parDate) // par class date
+  bigArticle.appendChild(parOne) // par 1
+  bigArticle.appendChild(parTwo) // par 2
+  bigArticle.appendChild(parThree) // par 3
+  bigArticle.appendChild(newSpan) // span
+
+
+  //Click listener
+  newSpan.addEventListener('click', () => { // created listener on item we want to be active
+    // want to click the button to turn on or off
+    // inside function we make sure it has option to on or off
+    bigArticle.classList.toggle('article-open') // option to on
+    bigArticle.classList.toggle('article-close') // option to off
+  })
+
+  newTitle.textContent = objData.title
+  parDate.textContent = objData.date
+  parOne.textContent = objData.firstParagraph
+  parTwo.textContent = objData.secondParagraph
+  parThree.textContent = objData.thirdParagraph
+  newSpan.textContent = 'Click Me! +'
+
+
+  return bigArticle;
+}
+
+
+data.push({
+  title: 'mytitle',
+  date: 'mydate',
+  firstParagraph: 'mypar1',
+  secondParagraph: 'mypar2',
+  thirdParagraph: 'mypar3'
+})
+
+
+/**** BEGIN FOREACH ******/
+
+
+data.map((objData) => {
+
+  const createdArticle = articleMaker(objData); // Telling foreach to iterate and place each object into function
+
+
+  groupArticles.appendChild(createdArticle); // Telling foreach to appendchild 
+
+  console.log(createdArticle); // for my own reference
+})
+
+
+/*
   <div class="article">
     <h2>{title of the article}</h2>
     <p class="date">{date of the article}</p>
@@ -106,7 +182,7 @@ const data = [
   Step 2: Still inside `articleMaker`, add an event listener to the span.expandButton.
   This listener should toggle the class 'article-open' on div.article.
 
-  Step 3: Don't forget to return something from your function!
+  Step 3: Don't forget to return something from your function! 
 
   Step 4: Outside your function now, loop over the data. At each iteration you'll use your component
   to create a div.article element and append it to the DOM inside div.articles (see index.html).
